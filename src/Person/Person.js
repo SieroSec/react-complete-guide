@@ -5,8 +5,9 @@ export const Person = (props) => {
       <div>
          <p onClick={props.click}><b>Name: {props.name}, age: {props.age}</b></p>
          <p>{props.children}</p>
+         <input type="text" onChange={props.changed} value={props.name} />
          <br />
-      </div>
+      </div >
    )
 }
 

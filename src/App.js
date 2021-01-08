@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { PersonClass, Person } from './Person/Person'
 import './App.css';
+import { render } from 'react-dom';
 
 const App = (props) => {
 
@@ -39,12 +40,19 @@ const App = (props) => {
   console.log('state:')
   console.log(personsState)
 
+  const style = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px'
+  }
 
   return (
+
     <div>
       <p>Random number: {Math.random()}</p>
 
-      <button onClick={() => switchNameHandler('ble')}>Button!</button>
+      <button style={style} onClick={() => switchNameHandler('ble')}>Button!</button>
 
       {/* <PersonClass name={personsState.persons[0].name} age={personsState.persons[0].age} >No children yet </PersonClass> */}
 
@@ -61,11 +69,8 @@ const App = (props) => {
         // age={personsState.persons[1].age}
         changed={nameChangeHandler}
       />
-
-    </div >
-  );
+    </div>
+  )
 }
 
 export default App;
-
-

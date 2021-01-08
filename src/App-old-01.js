@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { PersonClass, Person } from './Person/Person'
+import { PersonClass } from './Person/Person'
 import './App.css';
 
 const App = (props) => {
@@ -12,13 +12,13 @@ const App = (props) => {
     otherState: 'initial otherState'
   });
 
-  const switchNameHandler = (newName) => {
+  const switchNameHandler = () => {
     let newAge = (Math.random() * 100)
     console.log(personsState)
 
     setPersonState({
       persons: [{
-        name: newName, age: newAge
+        name: 'siero', age: newAge
       }],
       otherState: personsState.otherState
     })
@@ -26,21 +26,14 @@ const App = (props) => {
 
   const [otherState, setOtherState] = useState({ otherState: 'changed otherState' })
 
-  //console.log(personsState, otherState)
-  //console.log(personsState)
+  console.log(personsState, otherState)
+  console.log(personsState)
 
   return (
     <div>
-      <button onClick={() => switchNameHandler('ble')}>Button!</button>
-      <PersonClass name={personsState.persons[0].name} age={personsState.persons[0].age} >No children yet </PersonClass>
+      <button onClick={switchNameHandler}>Button!</button>
+      <PersonClass name='siero' age={personsState.persons[0].age} >No children yet </PersonClass>
       <p>Random number: {Math.random()}</p>
-
-      <Person
-        click={switchNameHandler.bind(this, 'MIAUUUU2222')}
-        name={personsState.persons[0].name}
-        age={personsState.persons[0].age}
-      >Person functional component</Person>
-
     </div >
   );
 }

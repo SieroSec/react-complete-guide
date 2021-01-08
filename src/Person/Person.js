@@ -24,5 +24,3 @@ export class PersonClass extends Component {
       )
    }
 }
-
-export default Person

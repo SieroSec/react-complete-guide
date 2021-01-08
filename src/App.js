@@ -1,35 +1,43 @@
-import React, { Component } from 'react';
-import { Person, PersonClass } from './Person/Person'
+import React, { Component, useState } from 'react';
+import { PersonClass } from './Person/Person'
 import './App.css';
 
-class App extends Component {
+const App = (props) => {
 
-  state = {
+  const [personsState, setPersonState] = useState({
     persons: [
       { name: 'siero', age: 37 },
       { name: 'dana', age: 35 },
-    ]
-  }
+    ],
+    otherState: 'initial otherState'
+  });
 
-  switchNameHandler = () => {
+  const switchNameHandler = () => {
+    let newAge = (Math.random() * 100)
+    console.log(personsState)
 
-
-    this.setState({
+    setPersonState({
       persons: [{
-        name: 'siero', age: 44
-      }]
+        name: 'siero', age: newAge
+      }],
+      otherState: personsState.otherState
     })
   }
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.switchNameHandler}>Button!</button>
-        <PersonClass name={this.state.persons[0].name} age={this.state.persons[0].age}>No children yet </PersonClass>
-        <p>Random number: {Math.random()}</p>
-      </div>
-    );
-  }
+  const [otherState, setOtherState] = useState({ otherState: 'changed otherState' })
+
+  console.log(personsState, otherState)
+  console.log(personsState)
+
+  return (
+    <div>
+      <button onClick={switchNameHandler}>Button!</button>
+      <PersonClass name='siero' age={personsState.persons[0].age} >No children yet </PersonClass>
+      <p>Random number: {Math.random()}</p>
+    </div >
+  );
 }
 
 export default App;
+
+

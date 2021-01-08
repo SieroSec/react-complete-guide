@@ -1,7 +1,8 @@
 import React, { Component, useState } from 'react';
-import { PersonClass as Person } from './Person/Person.js'
+import { PersonClass as Person, person as person } from './Person/Person.js'
 import './App.css';
 import { render } from 'react-dom';
+import Radium, { StyleRoot } from 'radium'
 
 class App extends Component {
   state = {
@@ -54,7 +55,7 @@ class App extends Component {
   render() {
     const style = {
       display: 'block',
-      backgroundColor: 'white',
+      backgroundColor: 'green',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -63,35 +64,57 @@ class App extends Component {
       border: '1px solid #eeeeee',
       boxShadow: '0 2px 3px #ccc',
       textAlign: 'center',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+    }
+    let persons = null
+
+    if (this.state.showPersons) {
+      persons = (<div>
+        {this.state.persons.map((person, index) => {
+          return <Person
+            name={person.name}
+            age={person.age}
+            key={person.id}
+            click={() => this.deletePersonHandler(index)}
+            changeHandler={(event) => this.nameChangeHandler(event, person.id)}>{index}</Person>
+        })}
+      </div>)
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
+    }
+
+    //let classes = ['red', 'bold'].join(' ');
+    let classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('red')
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold')
     }
 
     return (
-      <div className="App" >
-        <button
-          style={style}
-          onClick={this.togglePersonsHandler}>
-          toggle
+      <StyleRoot>
+        <div className="App" >
+          <p className={classes.join(' ')}>This is cool story bro!</p>
+
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>
+            toggle
           </button>
-        { this.state.showPersons ?
-          (
-            <div>
-              {this.state.persons.map((person, index) => {
-                return <Person
-                  name={person.name}
-                  age={person.age}
-                  key={person.id}
-                  click={() => this.deletePersonHandler(index)}
-                  changeHandler={(event) => this.nameChangeHandler(event, person.id)}>{index}</Person>
-              })}
-            </div>
-
-          ) : null
-        }
-
-
-      </div >
+          {persons}
+        </div>
+      </StyleRoot>
     )
   }
 }
 
-export default App;
+export default Radium(App);

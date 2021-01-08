@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Person.css';
 
-export const person = props => {
+export const Person = props => {
    return (
       <div className="Person">
          <p onClick={props.click}><b>Name: {props.name}, age: {props.age}</b></p>
@@ -13,11 +13,10 @@ export const person = props => {
 }
 
 export class PersonClass extends Component {
-
    render() {
       return (
          <div className="Person">
-            <p onClick={this.props.click}>Name: {this.props.name}</p>
+            <p onClick={this.props.click} > Name: {this.props.name}</p >
             <p>Age: {this.props.age}</p>
             <p>{this.props.children}</p>
             <input type="text" onChange={this.props.changeHandler} value={this.props.name} />
@@ -27,3 +26,4 @@ export class PersonClass extends Component {
    }
 }
 
+export default Person

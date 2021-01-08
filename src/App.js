@@ -1,8 +1,9 @@
 import React, { Component, useState } from 'react';
-import { PersonClass as Person, person as person } from './Person/Person.js'
+import { PersonClass as Person, person } from './Person/Person.js'
 import './App.css';
-import { render } from 'react-dom';
-import Radium, { StyleRoot } from 'radium'
+import styled from 'styled-components'
+
+const Button = styled.button`color: red`
 
 class App extends Component {
   state = {
@@ -101,20 +102,18 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App" >
-          <p className={classes.join(' ')}>This is cool story bro!</p>
+      <div className="App" >
+        <p className={classes.join(' ')}>This is cool story bro!</p>
 
-          <button
-            style={style}
-            onClick={this.togglePersonsHandler}>
-            toggle
+        <button
+          style={style}
+          onClick={this.togglePersonsHandler}>
+          toggle
           </button>
-          {persons}
-        </div>
-      </StyleRoot>
+        {persons}
+      </div>
     )
   }
 }
 
-export default Radium(App);
+export default App;

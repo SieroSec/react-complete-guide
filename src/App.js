@@ -14,7 +14,6 @@ const App = (props) => {
 
   const switchNameHandler = (newName) => {
     let newAge = (Math.random() * 100)
-    console.log(personsState)
 
     setPersonState({
       persons: [{
@@ -22,24 +21,46 @@ const App = (props) => {
       }],
       otherState: personsState.otherState
     })
+    console.log(personsState)
   }
 
-  const [otherState, setOtherState] = useState({ otherState: 'changed otherState' })
+  const nameChangeHandler = (event) => {
+    setPersonState({
+      persons: [{
+        name: event.target.value, age: 1234
+      }],
+      otherState: personsState.otherState
+    })
+  }
 
-  //console.log(personsState, otherState)
-  //console.log(personsState)
+
+  // const [otherState, setOtherState] = useState({ otherState: 'changed otherState' })
+
+  console.log('state:')
+  console.log(personsState)
+
 
   return (
     <div>
-      <button onClick={() => switchNameHandler('ble')}>Button!</button>
-      <PersonClass name={personsState.persons[0].name} age={personsState.persons[0].age} >No children yet </PersonClass>
       <p>Random number: {Math.random()}</p>
 
+      <button onClick={() => switchNameHandler('ble')}>Button!</button>
+
+      {/* <PersonClass name={personsState.persons[0].name} age={personsState.persons[0].age} >No children yet </PersonClass> */}
+
       <Person
-        click={switchNameHandler.bind(this, 'MIAUUUU2222')}
-        name={personsState.persons[0].name}
-        age={personsState.persons[0].age}
-      >Person functional component</Person>
+        click={switchNameHandler.bind(this, 'newName_1')}
+        // name={personsState.persons[0].name}
+        // age={personsState.persons[0].age}
+        changed={nameChangeHandler}
+      />
+
+      <Person
+        click={switchNameHandler.bind(this, 'newName_2')}
+        // name={personsState.persons[1].name}
+        // age={personsState.persons[1].age}
+        changed={nameChangeHandler}
+      />
 
     </div >
   );
